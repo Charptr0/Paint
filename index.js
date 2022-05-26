@@ -14,6 +14,11 @@ let mouseIsDown = false;
 let imageHistory = [];
 let currentIndex = -1;
 
+/**
+ * Listener for when the user is moving the mouse
+ * 
+ * Draw on the canvas iff when the mouse is held down
+ */
 canvas.addEventListener("mousemove", (e) => {
     // only draw if the mouse is down
     if(mouseIsDown) {
@@ -22,18 +27,29 @@ canvas.addEventListener("mousemove", (e) => {
     }
 })
 
+/**
+ * Listener for when the user have their mouse pressed down
+ * 
+ * Initialize drawing
+ */
 canvas.addEventListener("mousedown", (e) => {
-    mouseIsDown = true;     
+    mouseIsDown = true;
 
     // draw at least once
     const pos = getMousePos(e);
     draw(pos)
 })
 
+/**
+ * Listener for when the user have their lifted their mouse
+ * 
+ * Stop the user from drawing and record the current state of the canvas
+ */
 canvas.addEventListener("mouseup", () => {
-    mouseIsDown = false; // the user has let go of the 
+    mouseIsDown = false;
     ctx.beginPath();
 
+    // record the current stroke
     currentIndex++;
     imageHistory[currentIndex] = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
@@ -43,6 +59,9 @@ canvas.addEventListener("mouseup", () => {
     }
 })
 
+/**
+ * Listener for ctrl+x and ctrl+y for undo and redo
+ */
 addEventListener("keydown", (e) => {
     // undo last stroke
     if(e.ctrlKey && e.key === "z") {
@@ -55,6 +74,11 @@ addEventListener("keydown", (e) => {
     }
 })
 
+/**
+ * Get the current mouse position in the canvas
+ * @param e event 
+ * @returns the accurate x and y position
+ */
 function getMousePos(e) {
     const rect = canvas.getBoundingClientRect();
 
@@ -67,6 +91,10 @@ function getMousePos(e) {
     }
 }
 
+/**
+ * Draw in the canvas
+ * @param pos the current mouse position 
+ */
 function draw(pos) {
     ctx.strokeStyle = color.RED;
     ctx.lineWidth = 20;
@@ -78,6 +106,9 @@ function draw(pos) {
     ctx.moveTo(pos.x, pos.y);
 }
 
+/**
+ * Clear the canvas
+ */
 function clear() {
     ctx.fillStyle = color.WHITE;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -86,7 +117,11 @@ function clear() {
     currentIndex = -1;
 }
 
+/**
+ * Undo the last stroke
+ */
 function undo() {
+    // nothing to undo
     if(currentIndex < 1) {
         clear();
         return;
@@ -96,7 +131,11 @@ function undo() {
     ctx.putImageData(imageHistory[currentIndex], 0, 0);
 }
 
+/**
+ * Redo the last stroke
+ */
 function redo() {
+    // nothing to redo
     if(currentIndex === imageHistory.length - 1) {
         return;
     }
@@ -104,5 +143,3 @@ function redo() {
     currentIndex++;
     ctx.putImageData(imageHistory[currentIndex], 0, 0);
 }
-
-
