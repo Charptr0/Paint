@@ -17,7 +17,7 @@ let currentIndex = -1;
 canvas.addEventListener("mousemove", (e) => {
     // only draw if the mouse is down
     if(mouseIsDown) {
-        const pos = getMousePos(canvas, e);
+        const pos = getMousePos(e);
         draw(pos);
     }
 })
@@ -26,7 +26,7 @@ canvas.addEventListener("mousedown", (e) => {
     mouseIsDown = true;     
 
     // draw at least once
-    const pos = getMousePos(canvas, e);
+    const pos = getMousePos(e);
     draw(pos)
 })
 
@@ -55,7 +55,7 @@ addEventListener("keydown", (e) => {
     }
 })
 
-function getMousePos(canvas, e) {
+function getMousePos(e) {
     const rect = canvas.getBoundingClientRect();
 
     const scaleX = canvas.width / rect.width;
@@ -68,7 +68,7 @@ function getMousePos(canvas, e) {
 }
 
 function draw(pos) {
-    ctx.fillStyle = "#FFF000";
+    ctx.strokeStyle = color.RED;
     ctx.lineWidth = 20;
     ctx.lineCap = "round";
     
