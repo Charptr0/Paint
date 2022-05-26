@@ -1,24 +1,18 @@
+import * as color from "./colors.js";
+
 const canvas = document.querySelector("canvas");
 const windowHeight = window.innerHeight;
 const windowWidth = window.innerWidth;
 const ctx = canvas.getContext("2d");
 
 // set canvas height and width
-canvas.width = windowWidth * 0.8;
+canvas.width = windowWidth * 0.85;
 canvas.height = windowHeight * 0.8;
 
 // global variables
 let mouseIsDown = false;
-let userStrokes = [];
-const strokeHistory = [];
-
-/**
- * Draw a single shape when the user click their input device
- */
-canvas.addEventListener("click", (e) => {
-    const pos = getMousePos(canvas, e);
-    draw(pos);
-})
+let imageHistory = [];
+let currentIndex = -1;
 
 canvas.addEventListener("mousemove", (e) => {
     // only draw if the mouse is down
@@ -30,25 +24,29 @@ canvas.addEventListener("mousemove", (e) => {
 
 canvas.addEventListener("mousedown", (e) => {
     mouseIsDown = true;     
-    ctx.beginPath();
+
+    // draw at least once
+    const pos = getMousePos(canvas, e);
+    draw(pos)
 })
 
-canvas.addEventListener("mouseup", (e) => {
+canvas.addEventListener("mouseup", () => {
     mouseIsDown = false; // the user has let go of the 
     ctx.beginPath();
-    strokeHistory.push(userStrokes);
-    userStrokes = [];
+
+    currentIndex++;
+    imageHistory[currentIndex] = ctx.getImageData(0, 0, canvas.width, canvas.height);
 })
 
-addEventListener("keydown", (e) => {
+addEventListener("keydown", () => {
     undo();
 })
 
 function getMousePos(canvas, e) {
     const rect = canvas.getBoundingClientRect();
 
-    scaleX = canvas.width / rect.width;
-    scaleY = canvas.height / rect.height;
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
   
     return {
       x: (e.clientX - rect.left) * scaleX,  
@@ -56,31 +54,33 @@ function getMousePos(canvas, e) {
     }
 }
 
-function draw(mousePosition) {
-    ctx.fillStyle = "#FF0000";
+function draw(pos) {
+    ctx.fillStyle = "#FFF000";
     ctx.lineWidth = 20;
+    ctx.lineCap = "round";
     
-    ctx.lineTo(mousePosition.x, mousePosition.y);
+    ctx.lineTo(pos.x, pos.y);
     ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+}
 
-    userStrokes.push(mousePosition);
+function clear() {
+    ctx.fillStyle = color.WHITE;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    currentIndex = -1;
 }
 
 function undo() {
-    if(strokeHistory.length === 0) {
-        alert("Nothing left to undo");
+    if(currentIndex < 1) {
+        clear();
         return;
     }
 
-    const lastStroke = strokeHistory.pop();
-
-    Object.keys(lastStroke).forEach(key => {
-        ctx.beginPath();
-        ctx.fillStyle = "#FFFFFF";
-        ctx.lineTo(lastStroke[key].x, lastStroke[key].y);
-        ctx.stroke();
-        console.log(lastStroke[key]);
-    })
+    currentIndex--;
+    ctx.putImageData(imageHistory[currentIndex], 0, 0);
 }
 
 
