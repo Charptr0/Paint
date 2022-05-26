@@ -1,4 +1,18 @@
-canvas {
+#canvas-container {
     text-align: center;
-    border: 1px solid black;
+    padding-top: 40px;
+}
+
+h1 {
+    font-size: 60px;
+    margin: 0;
+}
+
+canvas {
+    border: 2px solid black;
+}
+
+.center {
+    text-align: center;
+    align-items: center;
 }
