@@ -36,10 +36,23 @@ canvas.addEventListener("mouseup", () => {
 
     currentIndex++;
     imageHistory[currentIndex] = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+    // destroy all future history if a new change has been made
+    if(currentIndex < (imageHistory.length - 1)) {
+        imageHistory.splice(currentIndex + 1, imageHistory.length);
+    }
 })
 
-addEventListener("keydown", () => {
-    undo();
+addEventListener("keydown", (e) => {
+    // undo last stroke
+    if(e.ctrlKey && e.key === "z") {
+        undo();
+    }
+
+    // redo last stroke
+    else if(e.ctrlKey && e.key === "y") {
+        redo();
+    }
 })
 
 function getMousePos(canvas, e) {
@@ -80,6 +93,15 @@ function undo() {
     }
 
     currentIndex--;
+    ctx.putImageData(imageHistory[currentIndex], 0, 0);
+}
+
+function redo() {
+    if(currentIndex === imageHistory.length - 1) {
+        return;
+    }
+
+    currentIndex++;
     ctx.putImageData(imageHistory[currentIndex], 0, 0);
 }
 
