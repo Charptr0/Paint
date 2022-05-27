@@ -5,6 +5,8 @@ const clearBtn = document.getElementById("clear-btn");
 const undoBtn = document.getElementById("undo-btn");
 const redoBtn = document.getElementById("redo-btn");
 
+const currentColorSpan = document.getElementById("current-color");
+
 const windowHeight = window.innerHeight;
 const windowWidth = window.innerWidth;
 const ctx = canvas.getContext("2d");
@@ -64,7 +66,12 @@ canvas.addEventListener("mouseup", () => {
 })
 
 /**
- * Listener for ctrl+x and ctrl+y for undo and redo
+ * Listener for keyboard shortcuts
+ * 
+ * Shortcuts:
+ * ctrl + z -> undo
+ * ctrl + y -> redo
+ * c -> clear
  */
 addEventListener("keydown", (e) => {
     // undo last stroke
@@ -75,6 +82,10 @@ addEventListener("keydown", (e) => {
     // redo last stroke
     else if(e.ctrlKey && e.key === "y") {
         redo();
+    }
+
+    else if(e.key === "c") {
+        clear();
     }
 })
 
@@ -88,7 +99,7 @@ redoBtn.addEventListener("click", redo);
  */
 function getCurrentColor() {
     // grab the current color
-    const currentColor = document.getElementById("current-color").innerHTML.toLowerCase();
+    const currentColor = currentColorSpan.innerHTML.toLowerCase();
 
     // try to convert to hex
     try {
