@@ -1,6 +1,10 @@
 import {COLORS} from "./colors.js";
 
 const canvas = document.querySelector("canvas");
+const clearBtn = document.getElementById("clear-btn");
+const undoBtn = document.getElementById("undo-btn");
+const redoBtn = document.getElementById("redo-btn");
+
 const windowHeight = window.innerHeight;
 const windowWidth = window.innerWidth;
 const ctx = canvas.getContext("2d");
@@ -74,12 +78,24 @@ addEventListener("keydown", (e) => {
     }
 })
 
+clearBtn.addEventListener("click", clear);
+undoBtn.addEventListener("click", undo);
+redoBtn.addEventListener("click", redo);
+
+/**
+ * Get the current color selected
+ * @returns the hex code of the current color
+ */
 function getCurrentColor() {
+    // grab the current color
     const currentColor = document.getElementById("current-color").innerHTML.toLowerCase();
 
+    // try to convert to hex
     try {
         return COLORS[currentColor];
     } catch (err) {
+        // return the default color if an error occurs
+        alert("Something went wrong, assuming default color")
         return COLORS.black;
     }
 }
@@ -120,7 +136,7 @@ function draw(pos) {
  * Clear the canvas
  */
 function clear() {
-    ctx.fillStyle = color.WHITE;
+    ctx.fillStyle = COLORS.white;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
