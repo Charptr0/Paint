@@ -1,0 +1,48 @@
+nav {
+    position: absolute;
+    background-color: rgb(181, 181, 181);
+    right: 0px;
+    top: 0px;
+    opacity: 80%;
+    width: 400px;
+    height: 100%;
+    float: right;
+    z-index: 9;
+}
+
+.menu-icon {
+    width: 50px;
+    height: 5px;
+    background-color: black;
+    margin: 15px;
+    margin-left: 20px;
+}
+
+#option-btn {
+    float: right;
+    margin-top: -125px;
+    margin-right: 20px;
+    background-color: transparent;
+    width: 100px;
+    height: 100px;
+    border-radius: 60%;
+    border: 0;
+    cursor: pointer;
+}
+
+#option-btn:hover {
+    background-color: rgb(213, 213, 213);
+    transition: 0.5s;
+}
+
+#close-option-btn {
+    float: right;
+    font-size: 70px;
+    background-color: transparent;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 0;
+    margin: 22px;
+    cursor: pointer;
+}
