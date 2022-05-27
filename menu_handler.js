@@ -2,7 +2,7 @@ const optionsBtn = document.getElementById("option-btn");
 const menu = document.querySelector("nav");
 const closeOptionBtn = document.getElementById("close-option-btn");
 
-setMenuVisibility("hidden");
+setMenuVisibility("visible");
 
 function menuVisible() {
     return menu.style.visibility === "visible";
@@ -25,6 +25,16 @@ addEventListener("keydown", (e) => {
         menuVisible() ? setMenuVisibility("hidden") : setMenuVisibility("visible");
     }
 })
+
+export function getPenSize() {
+    const penSize = document.getElementById("pen-size").value;
+    
+    if(penSize < 1) {
+        penSize = 1;
+    }
+
+    return penSize;
+}
 
 
 
