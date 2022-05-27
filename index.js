@@ -1,10 +1,11 @@
-import {COLORS} from "./colors.js";
+import {COLORS, generateRandomColor} from "./colors.js";
 
 const canvas = document.querySelector("canvas");
 const clearBtn = document.getElementById("clear-btn");
 const undoBtn = document.getElementById("undo-btn");
 const redoBtn = document.getElementById("redo-btn");
 const increaseCanvasHeightBtn = document.getElementById("increase-height-btn");
+const randomColorBtn = document.getElementById("random");
 
 const currentColorSpan = document.getElementById("current-color");
 const currentPenSize = document.getElementById("change-pen-size");
@@ -21,6 +22,7 @@ canvas.height = windowHeight * 0.8;
 let mouseIsDown = false;
 let imageHistory = [];
 let currentIndex = -1;
+let currentRandomColor = generateRandomColor();
 
 /**
  * Listener for when the user is moving the mouse
@@ -95,6 +97,10 @@ clearBtn.addEventListener("click", clear);
 undoBtn.addEventListener("click", undo);
 redoBtn.addEventListener("click", redo);
 
+randomColorBtn.addEventListener("click", () => {
+    currentRandomColor = generateRandomColor();
+})
+
 /**
  * Increase the canvas height by 1.5x
  */
@@ -113,6 +119,10 @@ increaseCanvasHeightBtn.addEventListener("click", () => {
 function getCurrentColor() {
     // grab the current color
     const currentColor = currentColorSpan.innerHTML.toLowerCase();
+
+    if(currentColor === "random") {
+        return currentRandomColor;
+    }
 
     // try to convert to hex
     try {
@@ -163,7 +173,7 @@ function clear() {
     ctx.fillStyle = COLORS.white;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+    
     currentIndex = -1;
 }
 

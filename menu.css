@@ -4,12 +4,13 @@
 
 nav {
     position: absolute;
+    visibility: hidden;
     background-color: rgb(181, 181, 181);
     right: 0px;
     top: 0px;
     opacity: 90%;
     width: 300px;
-    height: 150vh;
+    height: auto;
     float: right;
     z-index: 9;
 }
@@ -86,10 +87,15 @@ h3 {
 #pink {background-color: pink;}
 #purple {background-color: purple;}
 #grey {background-color: grey;}
+#magenta {background-color: magenta;}
+#random {
+    background: radial-gradient(circle, rgba(133,78,78,1) 0%, rgba(36,162,55,1) 30%, 
+    rgba(48,68,153,1) 77%, rgba(255,0,108,1) 100%);
+}
 
 .more-options-btn {
     display: inline-block;
-    width: 100px;
+    width: 150px;
     height: 45px;
     margin: 10px;
     border-radius: 15px;
@@ -99,7 +105,7 @@ h3 {
 }
 
 .more-options-btn:hover {
-    background-color: rgb(254, 123, 0);
+    background-color: rgb(191, 191, 191);
     transition: 0.3s;
 }
 

@@ -6,7 +6,6 @@ const currentColor = document.getElementById("current-color");
 const currentPenSize = document.getElementById("current-pen-size");
 const penInput = document.getElementById("change-pen-size");
 
-setMenuVisibility("hidden");
 
 penInput.addEventListener("change", () => {
     currentPenSize.innerHTML = penInput.value;
@@ -21,7 +20,13 @@ Object.keys(colorSelection).forEach((key) => {
 
     document.getElementById(id).addEventListener("click", () => {
         currentColor.innerHTML = id;
-        currentColor.style.color = id;
+        if(id === "random") {
+            currentColor.style.color = "black";
+        }
+
+        else {
+            currentColor.style.color = id;
+        }
     })
 })
 
