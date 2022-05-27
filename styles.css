@@ -20,3 +20,17 @@ canvas {
     text-align: center;
     align-items: center;
 }
+
+#increase-height-btn {
+    margin: 5px;
+    width: 500px;
+    height: 50px;
+    background-color: transparent;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+#increase-height-btn:hover {
+    background-color: rgb(133, 246, 133);
+    transition: 0.5s;
+}

@@ -6,7 +6,7 @@ const currentColor = document.getElementById("current-color");
 const currentPenSize = document.getElementById("current-pen-size");
 const penInput = document.getElementById("change-pen-size");
 
-setMenuVisibility("visible");
+setMenuVisibility("hidden");
 
 penInput.addEventListener("change", () => {
     currentPenSize.innerHTML = penInput.value;

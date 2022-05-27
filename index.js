@@ -4,8 +4,10 @@ const canvas = document.querySelector("canvas");
 const clearBtn = document.getElementById("clear-btn");
 const undoBtn = document.getElementById("undo-btn");
 const redoBtn = document.getElementById("redo-btn");
+const increaseCanvasHeightBtn = document.getElementById("increase-height-btn");
 
 const currentColorSpan = document.getElementById("current-color");
+const currentPenSize = document.getElementById("change-pen-size");
 
 const windowHeight = window.innerHeight;
 const windowWidth = window.innerWidth;
@@ -94,6 +96,17 @@ undoBtn.addEventListener("click", undo);
 redoBtn.addEventListener("click", redo);
 
 /**
+ * Increase the canvas height by 1.5x
+ */
+increaseCanvasHeightBtn.addEventListener("click", () => {
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height); 
+    
+    canvas.height *= 1.5;
+
+    ctx.putImageData(imageData, 0, 0);
+})
+
+/**
  * Get the current color selected
  * @returns the hex code of the current color
  */
@@ -134,7 +147,7 @@ function getMousePos(e) {
  */
 function draw(pos) {
     ctx.strokeStyle = getCurrentColor();
-    ctx.lineWidth = 20;
+    ctx.lineWidth = currentPenSize.value;
     ctx.lineCap = "round";
     
     ctx.lineTo(pos.x, pos.y);
