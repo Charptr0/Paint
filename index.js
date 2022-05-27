@@ -1,4 +1,4 @@
-import * as color from "./colors.js";
+import {COLORS} from "./colors.js";
 
 const canvas = document.querySelector("canvas");
 const windowHeight = window.innerHeight;
@@ -6,7 +6,7 @@ const windowWidth = window.innerWidth;
 const ctx = canvas.getContext("2d");
 
 // set canvas height and width
-canvas.width = windowWidth * 0.85;
+canvas.width = windowWidth * 0.8;
 canvas.height = windowHeight * 0.8;
 
 // global variables
@@ -74,6 +74,16 @@ addEventListener("keydown", (e) => {
     }
 })
 
+function getCurrentColor() {
+    const currentColor = document.getElementById("current-color").innerHTML.toLowerCase();
+
+    try {
+        return COLORS[currentColor];
+    } catch (err) {
+        return COLORS.black;
+    }
+}
+
 /**
  * Get the current mouse position in the canvas
  * @param e event 
@@ -96,7 +106,7 @@ function getMousePos(e) {
  * @param pos the current mouse position 
  */
 function draw(pos) {
-    ctx.strokeStyle = color.RED;
+    ctx.strokeStyle = getCurrentColor();
     ctx.lineWidth = 20;
     ctx.lineCap = "round";
     

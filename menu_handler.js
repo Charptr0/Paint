@@ -1,8 +1,19 @@
 const optionsBtn = document.getElementById("option-btn");
 const menu = document.querySelector("nav");
 const closeOptionBtn = document.getElementById("close-option-btn");
+const colorSelection = document.getElementsByClassName("color");
+const currentColor = document.getElementById("current-color");
 
 setMenuVisibility("visible");
+
+Object.keys(colorSelection).forEach((key) => {
+    const id = colorSelection.item(key).id;
+
+    document.getElementById(id).addEventListener("click", () => {
+        currentColor.innerHTML = id;
+        currentColor.style.color = id;
+    })
+})
 
 function menuVisible() {
     return menu.style.visibility === "visible";

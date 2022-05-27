@@ -1,11 +1,13 @@
 // default colors
-export const WHITE = "#FFFFFF";
-export const BLACK = "#000000";
-export const RED = "#FF0000";
-export const BLUE = "#00FF00";
-export const GREEN = "#0000FF";
-export const YELLOW = "#FFFF00";
-export const ORANGE = "#FFA500";
-export const PINK = "#FFC0CB";
-export const PURPLE = "#A020F0";
-export const GREY = "#808080";
+export const COLORS = {
+    white : "#FFFFFF",
+    black : "#000000",
+    red : "#FF0000",
+    blue : "#0000FF",
+    green : "#0000FF",
+    yellow : "#FFFF00",
+    orange : "#FFA500",
+    pink : "#FFC0CB",
+    purple : "#A020F0",
+    grey: "#808080",
+}
