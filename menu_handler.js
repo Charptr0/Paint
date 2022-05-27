@@ -3,8 +3,15 @@ const menu = document.querySelector("nav");
 const closeOptionBtn = document.getElementById("close-option-btn");
 const colorSelection = document.getElementsByClassName("color");
 const currentColor = document.getElementById("current-color");
+const currentPenSize = document.getElementById("current-pen-size");
+const penInput = document.getElementById("change-pen-size");
 
 setMenuVisibility("visible");
+
+penInput.addEventListener("change", () => {
+    currentPenSize.innerHTML = penInput.value;
+})
+
 
 /**
  * Set a click listener on every color square and update the current color

@@ -24,7 +24,7 @@
     <nav>
         <button id="close-option-btn"><strong>X</strong></button>
         <div class="center">
-            <h3 style="margin-top: 150px;">Colors</h3>
+            <h3 style="margin-top: 130px;">Colors</h3>
             <ul id="color-selection">
                 <li id="white" class="color"><div></div></li>
                 <li id="black" class="color"><div></div></li>
@@ -41,24 +41,24 @@
 
         <div class="center" id="choose-pen-size">
             <h3>Pen Size</h3>
-            <input type="number" min="1" value=20 id="pen-size">
+            <input type="number" min="1" value=20 id="change-pen-size">
         </div>
-        <div>
-            <button id="undo-btn">Undo</button>
-            <button id="redo-btn">Redo</button>
-            <button id="clear-btn">Clear</button>
-            <button>Save</button>
-            <button>Load</button>
+        <div class="center container">
+            <button id="undo-btn" class="more-options-btn">Undo</button>
+            <button id="redo-btn" class="more-options-btn">Redo</button>
+            <button id="clear-btn" class="more-options-btn">Clear</button>
+            <button class="more-options-btn">Save</button>
+            <button class="more-options-btn">Load</button>
         </div>
 
-        <div>
+        <div id="desc">
             <div>Current Color: <span id="current-color">black</span></div>
             <div>Pen Size: <span id="current-pen-size">20</span></div>
         </div>
     </nav>
 
     <div id="canvas-container" class="center container">
-        <canvas></canvas>
+        <canvas style="margin-top: -50px;"></canvas>
     </div>
 
     <div class="center container">
