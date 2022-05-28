@@ -35,3 +35,20 @@ canvas {
     background-color: rgb(133, 246, 133);
     transition: 0.5s;
 }
+
+#shortcuts ul {
+    list-style: none;
+    padding: 0;
+}
+
+#shortcuts li {
+    font-size: 30px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.shortcut-container {
+    display: inline-block;
+    width: 300px; 
+    justify-content: space-evenly;
+}
