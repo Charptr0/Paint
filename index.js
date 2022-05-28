@@ -5,6 +5,8 @@ const clearBtn = document.getElementById("clear-btn");
 const undoBtn = document.getElementById("undo-btn");
 const redoBtn = document.getElementById("redo-btn");
 const increaseCanvasHeightBtn = document.getElementById("increase-height-btn");
+const prevPageBtn = document.getElementById("prev-page-btn");
+const nextPageBtn = document.getElementById("next-page-btn");
 const randomColorBtn = document.getElementById("random");
 
 const currentColorSpan = document.getElementById("current-color");
@@ -22,7 +24,10 @@ canvas.height = windowHeight * 0.8;
 let mouseIsDown = false;
 let imageHistory = [];
 let currentIndex = -1;
+let currentPage = 1;
 let currentRandomColor = generateRandomColor();
+
+const pages = {};
 
 /**
  * Listener for when the user is moving the mouse
@@ -138,6 +143,21 @@ randomColorBtn.addEventListener("click", () => {
 })
 
 /**
+ * Previous button listener
+ */
+prevPageBtn.addEventListener("click", () => {
+    if(currentPage === 1) return;
+
+    // saved the canvas from last page
+    savePageData(currentPage);
+
+    currentPage--;
+
+    // restore the last page data
+    restorePageData(currentPage);
+})
+
+/**
  * Increase the canvas height by 1.5x
  */
 increaseCanvasHeightBtn.addEventListener("click", () => {
@@ -146,6 +166,21 @@ increaseCanvasHeightBtn.addEventListener("click", () => {
     canvas.height *= 1.5;
 
     ctx.putImageData(imageData, 0, 0);
+})
+
+/**
+ * Next button listener
+ */
+nextPageBtn.addEventListener("click", () => {
+    // saved the canvas from last page
+    savePageData(currentPage);
+
+    // clear board and image history
+    clear();
+    imageHistory = [];
+
+    currentPage++;
+    currentPage in pages ? restorePageData(currentPage) : savePageData(currentPage);
 })
 
 /**
@@ -238,4 +273,26 @@ function redo() {
 
     currentIndex++;
     ctx.putImageData(imageHistory[currentIndex], 0, 0);
+}
+
+/**
+ * Restore the canvas from the previous page
+ * @param page the page number
+ */
+function restorePageData(page) {
+    imageHistory = pages[page]["history"];
+    currentIndex = pages[page]["index"];
+    ctx.putImageData(pages[page]["imageData"], 0, 0);
+}
+
+/**
+ * Save the canvas on the current page
+ * @param page the page number 
+ */
+function savePageData(page) {
+    pages[page] = {
+        "history" : imageHistory,
+        "index" : currentIndex,
+        "imageData" : ctx.getImageData(0, 0, canvas.width, canvas.height)
+    } 
 }
