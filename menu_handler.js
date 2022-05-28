@@ -64,7 +64,5 @@ closeOptionBtn.addEventListener("click", () => {
  * Add a listener to the key e for opening and closing the menu
  */
 addEventListener("keydown", (e) => {
-    if(e.key === "e") {
-        menuVisible() ? setMenuVisibility("hidden") : setMenuVisibility("visible");
-    }
+    if(e.key === "e") menuVisible() ? setMenuVisibility("hidden") : setMenuVisibility("visible");
 })

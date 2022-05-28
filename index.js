@@ -81,15 +81,51 @@ addEventListener("keydown", (e) => {
     // undo last stroke
     if(e.ctrlKey && e.key === "z") {
         undo();
+        return;
     }
 
     // redo last stroke
     else if(e.ctrlKey && e.key === "y") {
         redo();
+        return;
     }
 
-    else if(e.key === "c") {
-        clear();
+    switch(e.key) {
+        case "c": // clear canvas shortcut
+            clear();
+            break;
+
+        case "f": // random color shortcut
+            currentRandomColor = generateRandomColor();
+            currentColorSpan.innerHTML = "random";
+            break;
+
+        case "b": // change to default black
+            currentColorSpan.innerHTML = "black";
+            break;
+
+        case "r": // change to red
+            currentColorSpan.innerHTML = "red";
+            break;
+
+        case "g": // change to red
+            currentColorSpan.innerHTML = "green";
+            break;
+
+        case "b": // change to default black
+            currentColorSpan.innerHTML = "blue";
+            break;
+
+        case "z": // decrease the pen size by 5
+            currentPenSize.value > 1 ? currentPenSize.value = parseInt(currentPenSize.value) - 5 : currentPenSize.value = 1;
+            break;
+
+        case "x": // increase the pen size by 5
+            currentPenSize.value = parseInt(currentPenSize.value) + 5;
+            break
+
+        default:
+            break;
     }
 })
 
