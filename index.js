@@ -117,8 +117,12 @@ addEventListener("keydown", (e) => {
             currentColorSpan.innerHTML = "green";
             break;
 
-        case "b": // change to default black
+        case "v": // change to blue
             currentColorSpan.innerHTML = "blue";
+            break;
+
+        case "q": // change to purple
+            currentColorSpan.innerHTML = "purple";
             break;
 
         case "z": // decrease the pen size by 5

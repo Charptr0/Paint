@@ -49,6 +49,5 @@ canvas {
 
 .shortcut-container {
     display: inline-block;
-    width: 300px; 
-    justify-content: space-evenly;
+    justify-content: space-around;
 }

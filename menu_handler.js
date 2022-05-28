@@ -6,11 +6,9 @@ const currentColor = document.getElementById("current-color");
 const currentPenSize = document.getElementById("current-pen-size");
 const penInput = document.getElementById("change-pen-size");
 
-
 penInput.addEventListener("change", () => {
     currentPenSize.innerHTML = penInput.value;
 })
-
 
 /**
  * Set a click listener on every color square and update the current color
