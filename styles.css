@@ -1,3 +1,11 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgb(21, 128, 228) 100%);
+}
+
 #canvas-container {
     text-align: center;
     padding-top: 40px;
@@ -27,12 +35,13 @@ canvas {
     height: 50px;
     font-size: 25px;
     background-color: transparent;
-    border: 1px solid black;
+    border: 1px solid rgb(10, 169, 227);
     cursor: pointer;
+    font-weight: bold;
 }
 
 .canvas-btn:hover {
-    background-color: rgb(133, 246, 133);
+    background-color: rgb(10, 149, 235);
     transition: 0.5s;
 }
 
