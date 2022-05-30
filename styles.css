@@ -60,3 +60,10 @@ canvas {
     display: inline-block;
     justify-content: space-around;
 }
+
+@media screen and (max-width: 600px) {
+    .canvas-btn {
+        width: 280px;
+        
+    }
+}

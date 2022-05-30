@@ -117,3 +117,27 @@ h3 {
     text-align: center;
 }
 
+@media screen and (max-width: 600px) {
+    #option-btn {
+        float: none;
+        margin: 20px;
+    }
+
+    .menu-icon {
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    nav {
+        width: 200px;
+    }
+
+    #change-pen-size {
+        width: 100px;
+    }
+
+    .more-options-btn {
+        width: 100px;
+    }
+}
