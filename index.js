@@ -286,6 +286,8 @@ function redo() {
 function restorePageData(page) {
     imageHistory = pages[page]["history"];
     currentIndex = pages[page]["index"];
+    canvas.width = pages[page]["width"];
+    canvas.height = pages[page]["height"];
     ctx.putImageData(pages[page]["imageData"], 0, 0);
 }
 
@@ -297,6 +299,8 @@ function savePageData(page) {
     pages[page] = {
         "history" : imageHistory,
         "index" : currentIndex,
+        "width" : canvas.width,
+        "height" : canvas.height,
         "imageData" : ctx.getImageData(0, 0, canvas.width, canvas.height)
     } 
 }
